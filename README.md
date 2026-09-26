@@ -6,9 +6,6 @@
 
 <table align="center"><tr><td valign="middle">
 
-</td><td valign="middle">
-<img src="https://raw.githubusercontent.com/erkanrzgc/ai-house/main/resources/icons/icon_256.png" width="150">
-</td></tr></table>
 
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.11+-blue?style=flat-square&logo=python" alt="python">
