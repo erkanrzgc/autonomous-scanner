@@ -220,4 +220,13 @@ def enumerate_subdomains(
         )
     else:
         log_info("Subdomain enum: no names found")
+
+    # Surface skipped/failed sources so a partial run (e.g. subfinder not
+    # installed) is never mistaken for a complete one.
+    if report.source_errors:
+        skipped = ", ".join(
+            f"{src} ({err})" for src, err in sorted(report.source_errors.items())
+        )
+        log_warning(f"Subdomain enum: {len(report.source_errors)} source(s) unavailable/failed: {skipped}")
+
     return report

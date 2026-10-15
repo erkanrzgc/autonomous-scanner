@@ -99,19 +99,40 @@ class NvidiaApiClient:
             return
 
         try:
-            # Simple list models check to verify connectivity/auth
+            # List models to verify connectivity/auth AND that the configured
+            # model is actually served. A 200 here only proves the key is valid;
+            # it does NOT prove self.model still exists (models get retired, e.g.
+            # HTTP 410 at generate time). Verifying membership avoids the
+            # "AI Engine ✓ at startup but every call fails" false positive.
             resp = httpx.get(
                 f"{self.base_url}/models",
                 headers={"Authorization": f"Bearer {self.api_key}"},
                 timeout=5
             )
-            if resp.status_code == 200:
-                self.available = True
-                if not getattr(self, "quiet", False):
-                    log_success(f"AI Engine: NVIDIA NIM ({self.model}) ✓")
-            else:
-                log_warning(f"NVIDIA API auth failed (status {resp.status_code})")
+            if resp.status_code != 200:
                 self.available = False
+                if not getattr(self, "quiet", False):
+                    log_warning(f"NVIDIA API auth failed (status {resp.status_code})")
+                return
+
+            try:
+                model_ids = {m.get("id") for m in resp.json().get("data", [])}
+            except (ValueError, AttributeError):
+                model_ids = set()
+
+            if model_ids and self.model not in model_ids:
+                self.available = False
+                if not getattr(self, "quiet", False):
+                    log_warning(
+                        f"NVIDIA model '{self.model}' is not available on this "
+                        f"account (not in /models). AI features disabled. "
+                        f"Pick an active model with --ai-model."
+                    )
+                return
+
+            self.available = True
+            if not getattr(self, "quiet", False):
+                log_success(f"AI Engine: NVIDIA NIM ({self.model}) ✓")
         except Exception:
             self.available = False
             if not getattr(self, "quiet", False):
