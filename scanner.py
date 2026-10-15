@@ -554,6 +554,12 @@ def main():
         start_proxy(listen_port=args.proxy_listen, scope=args.scope_proxy)
         return
 
+    # One-shot external tool availability summary so a partial run (missing
+    # binaries) is never mistaken for a complete one. Only for actual scans —
+    # api/compare/proxy modes have already returned above.
+    from utils.tool_availability import print_tool_availability
+    print_tool_availability()
+
     provided_dests = getattr(args, "_provided_dests", set())
 
     url_from_args = getattr(args, "target", "") or getattr(args, "url", "") or ""
