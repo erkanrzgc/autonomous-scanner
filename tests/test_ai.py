@@ -142,7 +142,7 @@ class TestAIModule:
     def test_default_model_constant(self):
         from utils.ai import DEFAULT_MODEL
 
-        assert DEFAULT_MODEL == "meta/llama-3.3-70b-instruct"
+        assert DEFAULT_MODEL == "nvidia/nemotron-3.5-lightning-30b-a3b"
 
     def test_init_ai_returns_client(self, monkeypatch):
         from utils.ai import init_ai

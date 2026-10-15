@@ -36,27 +36,15 @@ def print_gradient_banner():
     """Print the scanner banner with gradient colors"""
     if QUIET_MODE:
         return
-    banner = r"""
- ██████╗  ██████╗██████╗ ███╗   ███╗███╗   ██╗███████╗██████╗ 
-██╔════╝ ██╔════╝██╔══██╗████╗ ████║████╗  ██║██╔════╝██╔══██╗
-╚█████╗  ██║     ██████╔╝██╔████╔██║██╔██╗ ██║█████╗  ██████╔╝
- ╚═══██╗ ██║     ██╔══██╗██║╚██╔╝██║██║╚██╗██║██╔══╝  ██╔══██╗
-██████╔╝ ╚██████╗██║  ██║██║ ╚═╝ ██║██║ ╚████║███████╗██║  ██║
-╚═════╝   ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝
-"""
-    lines = banner.strip("\n").split("\n")
-    start, end = (230, 230, 230), (40, 40, 40)
-    for i, line in enumerate(lines):
-        ratio = i / max(len(lines) - 1, 1)
-        r, g, b = [int(start[j] + (end[j] - start[j]) * ratio) for j in range(3)]
-        hex_color = f"#{r:02x}{g:02x}{b:02x}"
-        console.print(f"[{hex_color}]{line}[/]")
 
-    description = (
-        "scanner is an AI-powered autonomous penetration testing framework\n"
-        "for web applications, APIs, networks, and cloud infrastructure."
+    repo_url = "https://github.com/erkanrzgc/autonomous-scanner"
+    console.print("[bold white]autonomous-scanner[/]")
+    console.print(
+        "[dim white]An AI-powered, multi-agent autonomous penetration testing framework.\n"
+        "It plans, executes, and reasons about security assessments across web\n"
+        "applications, APIs, networks, and cloud infrastructure with minimal supervision.[/]"
     )
-    console.print(f"[dim white]{description}[/]")
+    console.print(f"[dim]GitHub: [link={repo_url}]{repo_url}[/link][/]")
     console.print(f"[#646464]{'─' * 80}[/]\n")
 
 

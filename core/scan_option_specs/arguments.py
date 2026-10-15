@@ -443,7 +443,7 @@ PARSER_ARGUMENT_SPECS = (
         ("--ai-model",),
         {
             "default": DEFAULT_AI_MODEL,
-            "help": "NVIDIA API model (default: meta/llama-3.3-70b-instruct)",
+            "help": "NVIDIA API model (default: nvidia/nemotron-3.5-lightning-30b-a3b)",
         },
     ),
     ArgumentSpec(

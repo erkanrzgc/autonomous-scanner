@@ -15,7 +15,7 @@ except ImportError:
 from core.module_registry import ASYNC_MODULES, PHASE_MODULES
 from utils.request import get_default_timeout, get_path_blacklist
 
-DEFAULT_AI_MODEL = "meta/llama-3.3-70b-instruct"
+DEFAULT_AI_MODEL = "nvidia/nemotron-3.5-lightning-30b-a3b"
 # Read from env. Never hardcode an API key in source — keys committed to git
 # are leaked permanently in history. Set NVIDIA_API_KEY in .env or your shell.
 DEFAULT_NVIDIA_API_KEY = os.environ.get("NVIDIA_API_KEY", "")

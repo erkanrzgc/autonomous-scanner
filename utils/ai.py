@@ -1,8 +1,8 @@
 """
 scanner — AI/LLM Integration (NVIDIA NIM)
 
-NVIDIA NIM-based vulnerability analysis using high-performance Llama 3.3 70B.
-Default model: meta/llama-3.3-70b-instruct
+NVIDIA NIM-based vulnerability analysis using the NVIDIA Nemotron 3 family.
+Default model: nvidia/nemotron-3.5-lightning-30b-a3b
 
 Features:
     - Vulnerability analysis & exploit scenario generation
@@ -67,8 +67,8 @@ def resolve_nvidia_base() -> str:
     """Return the NVIDIA NIM API base URL."""
     return os.environ.get("NVIDIA_API_URL", "https://integrate.api.nvidia.com/v1")
 
-DEFAULT_MODEL = "meta/llama-3.3-70b-instruct"
-CODER_MODEL = "meta/llama-3.3-70b-instruct" # Using 70B for both as it is high performance
+DEFAULT_MODEL = "nvidia/nemotron-3.5-lightning-30b-a3b"  # fast, high-throughput default for per-finding calls
+CODER_MODEL = "nvidia/nemotron-3.5-lightning-30b-a3b"  # same model; swap to nemotron-3-super-120b-a12b via --ai-model for deeper reasoning
 
 # Model roles — which model to use for which task
 MODEL_ROLES = {
